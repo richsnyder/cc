@@ -31,7 +31,7 @@ FUNCTION(REPORT)
 
   CMAKE_PARSE_ARGUMENTS(A
     ""
-    "OUTPUT"
+    "OUTPUT;TITLE"
     "MARKDOWN;SOURCE"
     ${ARGN}
   )
@@ -94,17 +94,32 @@ FUNCTION(REPORT)
 
   # Create the LaTeX document.
 
+  IF(A_TITLE)
+    SET(title "${A_TITLE}")
+  ELSEIF(PROJECT_DESCRIPTION)
+    SET(title "${PROJECT_DESCRIPTION}")
+  ELSE()
+    SET(title "${PROJECT_NAME}")
+  ENDIF()
+
   GET_FILENAME_COMPONENT(dir ${A_OUTPUT} DIRECTORY)
   GET_FILENAME_COMPONENT(name_we ${A_OUTPUT} NAME_WE)
   SET(dst ${CMAKE_CURRENT_BINARY_DIR}/${dir}/${name_we}.tex)
   EXECUTE_PROCESS(COMMAND bash -c "echo '' | ${Pygmentize_EXECUTABLE} -f latex -O full -o ${dst}")
   FILE(READ ${dst} content)
+
   SET(match "\\section\*\{\}\n\n")
   SET(match "${match}\\begin\{Verbatim\}[commandchars=\\\\\\\{\\\}]\n\n")
   SET(match "${match}\\end\{Verbatim\}")
   STRING(REPLACE "${match}" "${inputs}" content "${content}")
+
   SET(match "\\usepackage[utf8]\{inputenc\}")
   STRING(REPLACE "${match}" "${match}\n${preamble}" content "${content}")
+
+  SET(match "\\begin\{document\}")
+  SET(replace "\\title\{${title}\}\n\\date\{\}\n\\begin\{document\}\n\n\\maketitle")
+  STRING(REPLACE "${match}" "${replace}" content "${content}")
+
   FILE(WRITE ${dst} ${content})
 
   # Create a documentation target.

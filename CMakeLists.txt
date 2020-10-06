@@ -7,7 +7,7 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.15.0 FATAL_ERROR)
 
-PROJECT(cc LANGUAGES C VERSION 0.1.0)
+PROJECT(cc VERSION 0.1.0 DESCRIPTION "C Containers Library (cc)" LANGUAGES C)
 
 # Add custom modules to the module search path.
 
@@ -26,7 +26,10 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/contrib)
 ADD_CUSTOM_TARGET(valgrind
     COMMAND docker build --tag=cc .
     COMMAND docker system prune --filter "label=name=cc" --force
-    COMMAND docker run --rm cc ./test-cc --leak-check=yes >& ${CMAKE_CURRENT_BINARY_DIR}/valgrind.txt
+    COMMAND docker run --rm cc
+      ./test-cc
+      --leak-check=yes >&
+      ${CMAKE_CURRENT_BINARY_DIR}/valgrind.txt
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 # Add the project subdirectories.
