@@ -17,8 +17,13 @@ SET(SOURCES
   ../contrib/xxhash/xxhash.c
 )
 
+SET(CONFIGURED_SOURCES
+  cc_version.c
+)
+
 SET(HEADERS
-  cc_cc.h
+  cc.h
+  cc_version.h
   cc_list.h
   cc_map.h
   cc_memory.h
@@ -27,9 +32,15 @@ SET(HEADERS
   ../contrib/xxhash/xxhash.h
 )
 
-SET(CONFIGURED_HEADERS
-  cc_version.h
-)
+#SET(CONFIGURED_HEADERS
+#  cc_version.h
+#)
+
+# Configure source files.
+
+FOREACH(file ${CONFIGURED_SOURCES})
+  CONFIGURE_FILE(${file}.in ${file} @ONLY)
+ENDFOREACH()
 
 # Identify the directories that contain include files.
 
@@ -38,18 +49,18 @@ INCLUDE_DIRECTORIES(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 
 # Configure header files.
 
-FOREACH(file ${CONFIGURED_HEADERS})
-  CONFIGURE_FILE(${file}.in ${file} @ONLY)
-ENDFOREACH()
+#FOREACH(file ${CONFIGURED_HEADERS})
+#  CONFIGURE_FILE(${file}.in ${file} @ONLY)
+#ENDFOREACH()
 
 # Mark the header files for installation.
 
 FOREACH(file ${HEADERS})
   INSTALL(FILES ${file} DESTINATION include/cc)
 ENDFOREACH()
-FOREACH(file ${CONFIGURED_HEADERS})
-  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${file} DESTINATION include/cc)
-ENDFOREACH()
+#FOREACH(file ${CONFIGURED_HEADERS})
+#  INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/${file} DESTINATION include/cc)
+#ENDFOREACH()
 
 # Define the library target.
 

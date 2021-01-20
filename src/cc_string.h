@@ -40,7 +40,7 @@ extern const size_t cc_string_sizeof;
 
 extern const struct cc_functions cc_string_functions;
 
-const size_t cc_npos = SIZE_MAX;
+extern const size_t cc_npos;
 
 uint64_t
 cc_string_hasher(const void* buffer, size_t size);
