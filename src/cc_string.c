@@ -13,6 +13,8 @@
 #include <string.h>
 #include "cc_string.h"
 
+const size_t cc_npos = SIZE_MAX;
+
 const size_t cc_string_sizeof = sizeof(struct cc_string);
 
 const struct cc_functions cc_string_functions = (struct cc_functions){

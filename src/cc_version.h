@@ -11,10 +11,10 @@
 #ifndef CC_VERSION_H
 #define CC_VERSION_H
 
-const char CC_VERSION[] = "@CMAKE_PROJECT_VERSION@";
+extern const char CC_VERSION[];
 
-const int CC_VERSION_MAJOR = @CMAKE_PROJECT_VERSION_MAJOR@;
-const int CC_VERSION_MINOR = @CMAKE_PROJECT_VERSION_MINOR@;
-const int CC_VERSION_PATCH = @CMAKE_PROJECT_VERSION_PATCH@;
+extern const int CC_VERSION_MAJOR;
+extern const int CC_VERSION_MINOR;
+extern const int CC_VERSION_PATCH;
 
 #endif // CC_VERSION_H

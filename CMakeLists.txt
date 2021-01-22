@@ -10,7 +10,7 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.15.0 FATAL_ERROR)
 
-PROJECT(cc VERSION 0.1.0 DESCRIPTION "C Containers Library (cc)" LANGUAGES C)
+PROJECT(cc VERSION 0.1.1 DESCRIPTION "C Containers Library (cc)" LANGUAGES C)
 
 # Add custom modules to the module search path.
 
