@@ -36,11 +36,11 @@ typedef struct cc_string* cc_string_t;
 
 typedef struct cc_string_iterator cc_string_iterator_t;
 
+extern const size_t cc_npos;
+
 extern const size_t cc_string_sizeof;
 
 extern const struct cc_functions cc_string_functions;
-
-extern const size_t cc_npos;
 
 uint64_t
 cc_string_hasher(const void* buffer, size_t size);
