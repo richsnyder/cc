@@ -56,10 +56,6 @@ FOREACH(file ${CONFIGURED_SOURCES})
   LIST(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/${file})
 ENDFOREACH()
 
-FOREACH(file ${SOURCES})
-  MESSAGE(STATUS ${file})
-ENDFOREACH()
-
 # Mark the header files for installation.
 
 FOREACH(file ${HEADERS})
